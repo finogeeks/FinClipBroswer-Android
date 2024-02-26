@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?><!-- For security reasons, you need to restrict the path configuration to avoid excessive FileProvider filesharing capabilities.
+Therefore, when configuring path, use path as a specific path instead of. Specifying the full path -->
+<paths>
+    <!-- external_dcim:
+    1.Applets APIchooseImage and JSSDK APIchooseImage need to create image files under the external-path/DCIM/Camera path when taking photos；
+    2.The applet APIchooseVideo needs to create a video file under the external-path/DCIM/Camera path when recording；
+    3.The applet loads H5. When selecting a file through the input tag in H5, if you want to take pictures or record videos through the Camera, you need to create a picture file under the external-path/DCIM/Camera path。-->
+    <external-path
+        name="external_dcim"
+        path="DCIM" />
+
+    <!-- Added screenshot saving for video component, required to save under Pictures/{app name} -->
+    <external-path
+        name="external_pictures"
+        path="Pictures" />
+    <!-- external_dcim:
+    1.Applet API previewImage, previewVideo, previewMedia to preview pictures or videos need to access /data/data/"Application package name"/files/finapplet path.-->
+    <files-path
+        name="files_finapplet"
+        path="finapplet" />
+
+    <cache-path
+        name="download"
+        path="download/public">
+    </cache-path>
+</paths>

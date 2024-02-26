@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/iv_close"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="12dp"
+        android:src="@drawable/login_nav_close"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_config_ser_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/fpt_server_address_prompt"
+        android:textColor="@color/black_2c3e51"
+        android:textSize="22sp"
+        app:layout_constraintStart_toStartOf="@+id/btn_scan_qr"
+        app:layout_constraintEnd_toEndOf="@+id/btn_scan_qr"
+        app:layout_constraintTop_toBottomOf="@+id/iv_close" />
+
+    <TextView
+        android:id="@+id/tv_tips"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="@string/fpt_fetch_config_prompt"
+        android:textColor="@color/white_9a9ea5"
+        android:textSize="13sp"
+        app:layout_constraintStart_toStartOf="@+id/btn_scan_qr"
+        app:layout_constraintEnd_toEndOf="@+id/btn_scan_qr"
+        app:layout_constraintTop_toBottomOf="@+id/tv_config_ser_title" />
+
+
+    <TextView
+        android:id="@+id/tv_input_tl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/fpt_manual_input"
+        android:textColor="@color/black_2c3e51"
+        android:textSize="13sp"
+        app:layout_constraintStart_toStartOf="@+id/btn_scan_qr"
+        app:layout_constraintTop_toBottomOf="@+id/tv_tips" />
+
+    <EditText
+        android:id="@+id/et_server_url"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/gray_solid_bg_4"
+        android:hint="@string/fpt_example_url"
+        android:paddingStart="12dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/white_c6c6c6"
+        android:textCursorDrawable="@drawable/cursor_color"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/iv_apply"
+        app:layout_constraintStart_toStartOf="@+id/btn_scan_qr"
+        app:layout_constraintTop_toBottomOf="@+id/tv_input_tl" />
+
+    <ImageView
+        android:id="@+id/iv_apply"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@drawable/blue_disable_bg_selector"
+        android:src="@drawable/login_input_go"
+        app:layout_constraintEnd_toEndOf="@+id/btn_scan_qr"
+        app:layout_constraintStart_toEndOf="@+id/et_server_url"
+        app:layout_constraintTop_toTopOf="@+id/et_server_url" />
+
+
+    <TextView
+        android:id="@+id/tv_qr_tl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:text="@string/fpt_scan_config"
+        android:textColor="@color/black_2c3e51"
+        android:textSize="13sp"
+        app:layout_constraintStart_toStartOf="@+id/btn_scan_qr"
+        app:layout_constraintTop_toBottomOf="@+id/et_server_url" />
+
+
+    <LinearLayout
+        android:id="@+id/btn_scan_qr"
+        style="@style/blue_solid_btn"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_qr_tl">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/login_button_scan" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/fpt_scan_qr_code_config_server"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tv_test_tl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:text="@string/fpt_test_environment"
+        android:textColor="@color/black_2c3e51"
+        android:textSize="13sp"
+        app:layout_constraintStart_toStartOf="@+id/btn_scan_qr"
+        app:layout_constraintTop_toBottomOf="@+id/btn_scan_qr" />
+
+
+    <LinearLayout
+        android:id="@+id/btn_finclip_url"
+        style="@style/blue_solid_btn"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_test_tl">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/login_button_fc" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/fpt_fin_clip_environment"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,36 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        google()
+        mavenCentral()
+        maven { url "https://jitpack.io" }
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        google()
+        mavenCentral()
+        maven { url "https://jitpack.io" }
+        maven {
+            url 'https://repo.spring.io/plugins-release/'
+        }
+        maven {
+            allowInsecureProtocol = true
+            url 'http://4thline.org/m2'
+        }
+        maven {
+            url 'https://gradle.finogeeks.club/repository/applet/'
+            credentials {
+                username 'applet'
+                password '123321'
+            }
+        }
+    }
+}
+rootProject.name = "FinClipBroswer"
+include ':app'

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/iv_back"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="12dp"
+        android:scaleType="center"
+        android:src="@drawable/login_nav_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_vc_tl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="27dp"
+        android:text="@string/fpt_enter_v_code"
+        android:textColor="@color/black_2c3e51"
+        android:textSize="22sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_sms_ok"
+        app:layout_constraintTop_toBottomOf="@+id/iv_back" />
+
+
+    <TextView
+        android:id="@+id/tv_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="26dp"
+        android:text="xxxx 138 0000 0000"
+        android:textSize="12sp"
+        android:textColor="@color/black_2c3e51"
+        app:layout_constraintStart_toStartOf="@+id/tv_sms_ok"
+        app:layout_constraintTop_toBottomOf="@+id/tv_vc_tl" />
+
+
+    <com.jkb.vcedittext.VerificationCodeEditText
+        android:id="@+id/vc_code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:inputType="number"
+        android:textColor="@color/gray_333"
+        android:textSize="25sp"
+        app:bottomLineHeight="1dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:bottomLineNormalColor="@color/gray_eaeaea"
+        app:bottomLineSelectedColor="@color/gray_eaeaea"
+        app:cursorColor="@color/blue_409eff"
+        app:cursorDuration="500"
+        app:cursorWidth="2dp"
+        app:figures="6"
+        app:layout_constraintTop_toBottomOf="@+id/tv_phone"
+        app:selectedBackgroundColor="@color/color_transparent"
+        app:verCodeMargin="10dp" />
+
+
+    <TextView
+        android:id="@+id/tv_sms_ok"
+        style="@style/blue_solid_btn"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="12dp"
+        android:enabled="false"
+        android:text="@string/fpt_login"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vc_code" />
+
+
+    <TextView
+        android:id="@+id/tv_resend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/fpt_re_get_v_code"
+        android:textSize="14sp"
+        android:textColor="@color/gray_9d9d9d"
+        android:enabled="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_sms_ok" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

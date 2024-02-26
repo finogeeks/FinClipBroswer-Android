@@ -1,0 +1,180 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    compileSdk 32
+
+    defaultConfig {
+        applicationId "com.finogeeks.finclip.openbrowser"
+        minSdk 21
+        targetSdk 32
+        versionCode 1
+        versionName "1.0.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", "API_PREFIX", "\"/api/v1/mop/\""
+
+        ndk {
+            abiFilters 'armeabi', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
+        }
+    }
+
+    signingConfigs {
+
+        debug {
+            keyAlias "openBrowser"
+            keyPassword "b123456"
+            storeFile file("../keystore/openBrowser.jks")
+            storePassword "b123456"
+        }
+        release {
+            keyAlias "openBrowser"
+            keyPassword "b123456"
+            storeFile file("../keystore/openBrowser.jks")
+            storePassword "b123456"
+        }
+    }
+
+    buildTypes {
+
+        debug {
+            minifyEnabled false
+            signingConfig signingConfigs.debug
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        release {
+            minifyEnabled true
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    flavorDimensions "default"
+
+    productFlavors {
+        browser {
+            dimension "default"
+            applicationId "com.finogeeks.finclip.openbrowser"
+            buildConfigField "String", "API_URL", "\"https://api.finclip.com\""
+            buildConfigField "String", "APM_URL", "\"https://api.finclip.com\""
+            buildConfigField "String", "SDK_KEY", "\"22LyZEib0gLTQdU3MUauAfm+m7PCpCHZRMKS3X8Fyq08NDQIavxKhnteuHH2EV6c\""
+            buildConfigField "String", "SDK_SECRET", "\"8e0dafa7757dd8fe\""
+        }
+    }
+
+    packagingOptions {
+        // libsdkcore.so is hardened and should not be compressed, otherwise it will give an error when loading the dynamic library
+        doNotStrip "*/x86/libsdkcore.so"
+        doNotStrip "*/x86_64/libsdkcore.so"
+        doNotStrip "*/armeabi/libsdkcore.so"
+        doNotStrip "*/armeabi-v7a/libsdkcore.so"
+        doNotStrip "*/arm64-v8a/libsdkcore.so"
+
+        doNotStrip "*/x86/libfin-yuvutil.so"
+        doNotStrip "*/x86_64/libfin-yuvutil.so"
+        doNotStrip "*/armeabi/libfin-yuvutil.so"
+        doNotStrip "*/armeabi-v7a/libfin-yuvutil.so"
+        doNotStrip "*/arm64-v8a/libfin-yuvutil.so"
+
+        exclude 'META-INF/beans.xml'
+    }
+    lintOptions {
+        abortOnError false
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    /**
+     * apk Renaming
+     */
+    android.applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            def outputFile = output.outputFile
+            def buildTime = new Date().format("yyyyMMddHHmm")
+            def apkName = "${variant.name}_"  + "v${variant.versionName}_" + "${variant.versionCode}_" + "${buildTime}"
+            if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                outputFileName = "${apkName.toLowerCase()}.apk"
+            }
+        }
+    }
+
+}
+
+configurations {
+    implementation.exclude group: 'cn.bingoogolapple', module: 'bga-qrcode-core'
+}
+
+dependencies {
+
+    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.appcompat:appcompat:1.3.0'
+    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+
+    implementation 'com.drakeet.multitype:multitype:4.2.0'
+    implementation 'com.github.li-xiaojun:XPopup:2.9.19'
+    implementation 'com.squareup.okhttp3:okhttp:4.9.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.9.0'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.20'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    implementation 'com.uber.autodispose:autodispose-android-archcomponents:1.3.0'
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.blankj:utilcodex:1.30.6'
+    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation 'com.github.bingoogolapple.BGAQRCode-Android:zbar:1.3.8' //1.3.7 has bug
+
+    implementation 'com.guolindev.permissionx:permissionx:1.7.1'
+    implementation 'com.auth0.android:jwtdecode:2.0.0'
+    implementation 'org.bouncycastle:bcpkix-jdk15on:1.68'
+    implementation 'org.bouncycastle:bcprov-jdk15on:1.68'
+    implementation 'io.coil-kt:coil:1.1.1'
+    implementation 'com.justkiddingbaby:vercodeedittext:1.1.0'
+
+    //FinClip
+    //live, webrtc and agora are incompatible with each other
+    def sdk_version = "2.43.5"
+    implementation "com.finogeeks.lib:finapplet:${sdk_version}"
+    implementation "com.finogeeks.mop:plugins:${sdk_version}"
+    implementation "com.finogeeks.mop:live:${sdk_version}"
+    implementation "com.finogeeks.mop:map:${sdk_version}"
+    //implementation "com.finogeeks.mop:webrtc:${sdk_version}"
+    implementation "com.finogeeks.mop:bluetooth:${sdk_version}"
+    implementation "com.finogeeks.mop:contact:${sdk_version}"
+    //implementation "com.finogeeks.mop:agora:${sdk_version}"
+    implementation "com.finogeeks.mop:clipboard:${sdk_version}"
+    implementation "com.finogeeks.mop:media:${sdk_version}"
+    implementation "com.finogeeks.mop:cast:${sdk_version}"
+    implementation "com.finogeeks.mop:share:${sdk_version}"
+    implementation "com.finogeeks.mop:xlog:${sdk_version}"
+    implementation "com.finogeeks.mop:calendar:${sdk_version}"
+    // ijk
+    implementation 'tv.danmaku.ijk.media:ijkplayer-java:0.8.8'
+    //Tencent X5
+    implementation 'com.tencent.tbs:tbssdk:44275'
+    // Tencent map start
+    //implementation 'com.tencent.map:tencent-map-vector-sdk:4.5.9'
+    //implementation 'com.tencent.map.geolocation:TencentLocationSdk-openplatform:7.4.9'
+    // Tencent map end
+
+    // Autonavi map start
+    implementation 'com.amap.api:3dmap:9.5.0'
+    implementation 'com.amap.api:search:9.5.0'
+    // Autonavi map end
+}
